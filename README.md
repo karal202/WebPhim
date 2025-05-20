@@ -134,7 +134,7 @@ Dự án dùng PDO để kết nối MySQL qua `app/config/config.php`.
 - Truy cập `http://localhost/db_test.php`. Nếu thấy thông báo thành công, MySQL hoạt động.
 
 ### 3. Kiểm tra HTML/CSS/JS
-- Tạo `test.html`:
+- Tạo `test.html`trong chính thư mục WebPhim để kiểm tra kết nối :
   ```html
   <!DOCTYPE html>
   <html>
@@ -150,42 +150,6 @@ Dự án dùng PDO để kết nối MySQL qua `app/config/config.php`.
   ```
 - Truy cập `http://localhost/index.html`. Nếu hiển thị đúng, môi trường hoạt động.
 
-## Tạo dự án mẫu
-1. Tạo thư mục `myproject` trong `C:\xampp\htdocs` (XAMPP) hoặc `C:\laragon\www` (Laragon).
-2. Tạo cấu trúc:
-   ```
-   myproject/
-   ├── app/
-   │   └── config/
-   │       └── config.php
-   ├── test.php
-   ├── style.css
-   ├── script.js
-   └── webphimm.sql
-   ```
-3. Ví dụ `test.php`:
-   ```php
-   <?php
-   require_once 'app/config/config.php';
-   try {
-       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-       echo "Kết nối database thành công!";
-   } catch (PDOException $e) {
-       echo "Kết nối thất bại: " . $e->getMessage();
-   }
-   ?>
-   <!DOCTYPE html>
-   <html>
-   <head>
-       <title>My Project</title>
-       <link rel="stylesheet" href="style.css">
-   </head>
-   <body>
-       <h1>Chào mừng đến với dự án</h1>
-       <script src="script.js"></script>
-   </body>
-   </html>
-   ```
 4. Đảm bảo chạy và xóa `webphimm.sql` sau khi import.
 
 ## Lưu ý
