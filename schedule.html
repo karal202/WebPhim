@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Đặt lịch xem phim tại TVN Films - Hệ thống rạp chiếu phim hiện đại, sang trọng.">
+    <meta name="keywords" content="đặt vé xem phim, lịch chiếu phim, TVN Films, rạp chiếu phim">
+    <meta name="author" content="TVN Films">
+    <title>Đặt Lịch Xem Phim - TVN Films</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/schedule.css">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">TVN Films</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="genreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-list me-1"></i> Thể loại
+                        </a>
+                        <ul class="dropdown-menu" id="genreMenu" aria-labelledby="genreDropdown"></ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="countryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe me-1"></i> Quốc gia
+                        </a>
+                        <ul class="dropdown-menu" id="countryMenu" aria-labelledby="countryDropdown"></ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="trending"><i class="fas fa-fire me-1"></i> Nổi bật</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="thuyet-minh"><i class="fas fa-microphone me-1"></i> Thuyết minh</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="vietsub"><i class="fas fa-closed-captioning me-1"></i> Vietsub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="theater"><i class="fas fa-theater-masks me-1"></i> Đã chiếu rạp</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto" id="userNav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html"><i class="fas fa-sign-in-alt me-1"></i> Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html"><i class="fas fa-user-plus me-1"></i> Đăng ký</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Nội dung chính -->
+    <main>
+        <!-- Schedule Form -->
+        <div class="container schedule-container">
+            <h1 class="text-center mb-5 section-title">Đặt Lịch Xem Phim</h1>
+            <div class="schedule-row">
+                <!-- Movie Image -->
+                <div class="movie-image">
+                    <img src="" alt="Hình ảnh phim" id="movieThumbnail" loading="lazy" onerror="this.src='public/images/placeholder-movie.jpg';">
+                </div>
+                <!-- Schedule Form -->
+                <div class="schedule-form">
+                    <form id="scheduleForm" aria-label="Form đặt lịch xem phim">
+                        <div class="mb-3">
+                            <label for="selectedMovie" class="form-label">Đã chọn phim:</label>
+                            <div id="selectedMovie" style="color: #ff8c00; font-size: 1.5rem; font-weight: 600;" aria-live="polite"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateList" class="form-label">Chọn ngày chiếu:</label>
+                            <div id="dateList" class="option-group" role="radiogroup" aria-label="Danh sách ngày chiếu"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="scheduleList" class="form-label">Danh sách lịch chiếu:</label>
+                            <div id="scheduleList" class="option-group" role="radiogroup" aria-label="Danh sách lịch chiếu"></div>
+                        </div>
+                        <!-- Sơ đồ ghế -->
+                        <div class="mb-3">
+                            <label for="seatMap" class="form-label">Chọn ghế:</label>
+                            <div class="seat-map-container">
+                                <div class="screen-label">Màn hình</div>
+                                <div id="seatMap" class="seat-map" role="grid" aria-label="Sơ đồ ghế ngồi"></div>
+                                <div class="seat-legend" aria-label="Chú thích trạng thái ghế">
+                                    <div><span class="seat available"></span> Ghế trống</div>
+                                    <div><span class="seat selected"></span> Ghế đã chọn</div>
+                                    <div><span class="seat booked"></span> Ghế đã đặt</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Bạn có muốn thêm dịch vụ đi kèm không?</label>
+                            <div class="option-group" role="radiogroup" aria-label="Lựa chọn thêm dịch vụ">
+                                <button type="button" class="option-btn service-toggle" data-value="yes">Có</button>
+                                <button type="button" class="option-btn service-toggle selected" data-value="no">Không</button>
+                            </div>
+                        </div>
+                        <div class="service-section" id="serviceSection" style="display: none;">
+                            <label for="serviceList" class="form-label">Dịch vụ đi kèm:</label>
+                            <div id="serviceList" class="service-list" role="list" aria-label="Danh sách dịch vụ đi kèm"></div>
+                        </div>
+                        <div class="total-price" aria-live="polite">
+                            <div class="base-price">Giá vé: <span id="basePrice">0đ</span></div>
+                            <span id="totalPrice">0đ</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span class="btn-text">Đặt Lịch</span>
+                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2025 TVN Films.</p>
+            <div class="social-links mt-2">
+                <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/schedule.js"></script>
+</body>
+</html>

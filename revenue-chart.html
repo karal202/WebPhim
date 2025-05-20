@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biểu Đồ Doanh Thu - TVN Films</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/admin.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">TVN Films</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.html"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <h1 class="text-center mb-4 section-title">Biểu Đồ Doanh Thu</h1>
+        <div class="row mb-4">
+            <div class="col-md-6 offset-md-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <label for="chartType" class="form-label">Chọn loại biểu đồ:</label>
+                        <select id="chartType" class="form-select bg-dark text-white border-light">
+                            <option value="monthly">Doanh thu theo tháng</option>
+                            <option value="movie">Doanh thu theo phim</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <canvas id="revenueChart" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2025 TVN Films.</p>
+            <div class="social-links mt-2">
+                <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            let chart;
+
+            // Function to format revenue numbers with thousand separators
+            const formatNumber = (num) => {
+                return num.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            };
+
+            // Function to initialize or update the chart
+            const updateChart = (labels, data, label) => {
+                if (chart) {
+                    chart.destroy();
+                }
+                chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return formatNumber(value);
+                                    },
+                                    color: '#ffffff'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#ffffff'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + formatNumber(context.parsed.y);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            // Function to fetch and display monthly revenue
+            const loadMonthlyRevenue = () => {
+                fetch('http://localhost/WebPhim/api/revenue.php?action=get_monthly_revenue')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error from API:', data.error);
+                            updateChart(['Lỗi'], [0], 'Doanh thu');
+                            return;
+                        }
+                        const labels = data.map(item => item.month);
+                        const revenues = data.map(item => item.revenue);
+                        updateChart(labels, revenues, 'Doanh thu');
+                    })
+                    .catch(error => {
+                        console.error('Lỗi tải dữ liệu doanh thu theo tháng:', error);
+                        updateChart(['Lỗi'], [0], 'Doanh thu');
+                    });
+            };
+
+            // Function to fetch and display revenue by movie
+            const loadRevenueByMovie = () => {
+                fetch('http://localhost/WebPhim/api/revenue.php?action=get_revenue_by_movie')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error from API:', data.error);
+                            updateChart(['Lỗi'], [0], 'Doanh thu');
+                            return;
+                        }
+                        const labels = data.map(item => item.movie_title);
+                        const revenues = data.map(item => item.revenue);
+                        updateChart(labels, revenues, 'Doanh thu');
+                    })
+                    .catch(error => {
+                        console.error('Lỗi tải dữ liệu doanh thu theo phim:', error);
+                        updateChart(['Lỗi'], [0], 'Doanh thu');
+                    });
+            };
+
+            // Load initial chart (monthly revenue)
+            loadMonthlyRevenue();
+
+            // Handle chart type change
+            const chartTypeSelect = document.getElementById('chartType');
+            chartTypeSelect.addEventListener('change', () => {
+                const type = chartTypeSelect.value;
+                if (type === 'monthly') {
+                    loadMonthlyRevenue();
+                } else if (type === 'movie') {
+                    loadRevenueByMovie();
+                }
+            });
+
+            // Handle logout
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('email');
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+/* Reset và cài đặt chung (kế thừa từ style.css và schedule.css) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container chính */
+.schedule-container {
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 30px auto;
+    max-width: 1400px;
+    position: relative;
+    background: #1a1a1a;
+}
+
+.schedule-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(248, 193, 70, 0.05) 0%, transparent 50%);
+    opacity: 0.15;
+    pointer-events: none;
+    animation: glow 20s infinite;
+}
+
+@keyframes glow {
+    0% { transform: scale(1); opacity: 0.15; }
+    50% { transform: scale(1.1); opacity: 0.3; }
+    100% { transform: scale(1); opacity: 0.15; }
+}
+
+/* Tiêu đề */
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #f8c146;
+    position: relative;
+    padding-left: 15px;
+    text-align: center;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 60%;
+    background-color: #f8c146;
+    border-radius: 5px;
+}
+
+/* Hàng chứa ảnh phim và form */
+.schedule-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* Ảnh phim */
+.movie-image {
+    flex: 0 0 350px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.movie-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #f8c146;
+}
+
+/* Form chi tiết thanh toán */
+.schedule-form {
+    flex: 1;
+    background: #2a2a2a;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.schedule-form h2 {
+    color: #f8c146;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.schedule-form label {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Chi tiết hóa đơn */
+.invoice-details {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid #f8c146;
+}
+
+.invoice-details p {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.invoice-details p strong {
+    color: #f8c146;
+}
+
+/* Nút thanh toán */
+.payment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.payment-button {
+    flex: 1 1 45%;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #f8c146;
+    border-radius: 6px;
+    background-color: #2a2a2a;
+    color: #f8c146;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-button:hover {
+    background-color: #f8c146;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+.payment-button img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .schedule-container {
+        max-width: 1000px;
+    }
+
+    .movie-image {
+        flex: 0 0 300px;
+    }
+
+    .movie-image img {
+        height: 450px;
+    }
+
+    .schedule-form {
+        padding: 35px 25px;
+    }
+
+    .schedule-form h2 {
+        font-size: 1.8rem;
+    }
+
+    .payment-button {
+        flex: 1 1 100%;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .schedule-container {
+        max-width: 800px;
+    }
+
+    .movie-image {
+        flex: 0 0 280px;
+    }
+
+    .movie-image img {
+        height: 400px;
+    }
+
+    .schedule-form {
+        padding: 30px 20px;
+    }
+
+    .payment-button {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .schedule-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-image {
+        flex: 0 0 100%;
+        max-width: 300px;
+    }
+
+    .movie-image img {
+        height: 350px;
+    }
+
+    .schedule-form {
+        padding: 20px 15px;
+    }
+
+    .schedule-form h2 {
+        font-size: 1.6rem;
+    }
+
+    .invoice-details p {
+        font-size: 1rem;
+    }
+
+    .payment-button {
+        flex: 1 1 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .schedule-container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .movie-image {
+        max-width: 250px;
+    }
+
+    .movie-image img {
+        height: 300px;
+    }
+
+    .schedule-form {
+        padding: 15px 10px;
+    }
+
+    .schedule-form h2 {
+        font-size: 1.4rem;
+    }
+
+    .invoice-details p {
+        font-size: 0.95rem;
+    }
+
+    .payment-button {
+        flex: 1 1 100%;
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .payment-button img {
+        width: 20px;
+        height: 20px;
+    }
+}

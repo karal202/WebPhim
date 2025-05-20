@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Admin - TVN Films</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/admin.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">TVN Films</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-2" id="userNav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <h1 class="text-center mb-4 section-title">Bảng Quản Lý Admin</h1>
+        <div class="row">
+            <!-- Quản lý phim -->
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-film fa-3x mb-3"></i>
+                        <h5 class="card-title">Quản Lý Phim</h5>
+                        <p class="card-text">Thêm, sửa, xóa phim trong hệ thống.</p>
+                        <a href="manage-movies.html" class="btn btn-outline-light">Quản lý</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Quản lý dịch vụ -->
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-screwdriver-wrench fa-3x mb-3"></i>
+                        <h5 class="card-title">Quản Lý Dịch Vụ</h5>
+                        <p class="card-text">Quản lý các dịch vụ đi kèm khi người dùng đặt lịch.</p>
+                        <a href="manage-service.html" class="btn btn-outline-light">Quản lý</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Quản lý lịch chiếu -->
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-calendar-alt fa-3x mb-3"></i>
+                        <h5 class="card-title">Quản Lý Lịch Chiếu</h5>
+                        <p class="card-text">Sắp xếp lịch chiếu và phòng chiếu cho phim.</p>
+                        <a href="manage-schedules.html" class="btn btn-outline-light">Quản lý</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Quản lý hóa đơn -->
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-invoice fa-3x mb-3"></i>
+                        <h5 class="card-title">Quản Lý Hóa Đơn</h5>
+                        <p class="card-text">Xem và quản lý hóa đơn đặt lịch của khách.</p>
+                        <a href="manage-invoices.html" class="btn btn-outline-light">Quản lý</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Biểu đồ doanh thu -->
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                        <h5 class="card-title">Biểu Đồ Doanh Thu</h5>
+                        <p class="card-text">Xem biểu đồ doanh thu theo tháng hoặc phim.</p>
+                        <a href="revenue-chart.html" class="btn btn-outline-light">Xem biểu đồ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2025 TVN Films.</p>
+            <div class="social-links mt-2">
+                <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/admin.js"></script>
+</body>
+</html>

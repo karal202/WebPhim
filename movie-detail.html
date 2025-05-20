@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết và Xem Phim - TVN Films</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/movie-detail.css">
+    <link rel="stylesheet" href="public/css/movie.css">
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Tỷ lệ 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background-color: #000;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .action-buttons .btn {
+            flex: 1 1 auto;
+            min-width: 150px;
+        }
+        .movie-detail {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .rating-stars {
+            margin-top: 10px;
+            color: #ffd700;
+        }
+        .alert-warning {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">TVN Films</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home"></i> TRANG CHỦ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="genreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-list"></i> THỂ LOẠI
+                        </a>
+                        <ul class="dropdown-menu" id="genreMenu" aria-labelledby="genreDropdown"></ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="countryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe"></i> QUỐC GIA
+                        </a>
+                        <ul class="dropdown-menu" id="countryMenu" aria-labelledby="countryDropdown"></ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="trending"><i class="fas fa-fire"></i> NỔI BẬT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="thuyet-minh"><i class="fas fa-microphone"></i> THUYẾT MINH</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="vietsub"><i class="fas fa-closed-captioning"></i> VIETSUB</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="theater"><i class="fas fa-theater-masks"></i> ĐÃ CHIẾU RẠP</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-2" id="userNav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Thanh tìm kiếm -->
+    <div class="search-container">
+        <form class="d-flex" id="searchForm">
+            <input class="form-control me-2" type="search" placeholder="Nhập tên phim..." aria-label="Search" id="searchInput">
+            <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="container mt-5">
+        <h1 id="movie-title"></h1>
+        <div class="video-container" id="video-player">
+            <p>Đang tải video...</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="#" class="btn btn-danger" id="schedule-button">Đặt Lịch Xem Phim</a>
+            <button class="btn btn-info" id="share-button"><i class="fas fa-share"></i> Chia sẻ</button>
+            <button class="btn btn-primary btn-bookmark" id="bookmark-button"><i class="fas fa-bookmark"></i> Lưu phim</button>
+        </div>
+
+        <!-- Movie Detail -->
+        <div class="movie-detail" id="movie-detail">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="" alt="" class="img-fluid" id="movieThumbnail">
+                    <div class="rating-stars">
+                        <span id="rating-stars"></span>
+                        (<span id="movie-ratings-display"></span>/10 từ <span id="movie-votes"></span> lượt)
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <p><strong>Năm phát hành:</strong> <span id="movie-release-year"></span></p>
+                    <p><strong>Trạng thái:</strong> <span id="movie-status"></span></p>
+                    <p><strong>Diễn viên:</strong> <span id="movie-actors"></span></p>
+                    <p><strong>Thời lượng:</strong> <span id="movie-duration"></span></p>
+                    <p><strong>Ngôn ngữ:</strong> <span id="movie-language"></span></p>
+                    <p><strong>Quốc gia:</strong> <span id="movie-country"></span></p>
+                    <p><strong>Thể loại:</strong> <span id="movie-genre"></span></p>
+                    <p><strong>Mô tả:</strong> <span id="movie-description"></span></p>
+                    <p><strong>Lượt xem:</strong> <span id="movie-views"></span></p>
+                    <p><strong>Đánh giá trung bình:</strong> <span id="movie-ratings"></span>/10</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert alert-warning">
+            <i class="fas fa-bullhorn"></i> Nếu bạn muốn quay về ký ức thì hãy đến rạp TVN Film nơi cho bạn những kỷ niệm
+        </div>
+
+        <!-- Suggested Movies -->
+        <section class="movie-section suggested-movies mt-5">
+            <div class="movie-list">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="section-title suggested-title">PHIM GỢI Ý</h2>
+                    <div class="carousel-arrows">
+                        <button class="carousel-arrow prev" data-carousel="suggested-carousel">❮</button>
+                        <button class="carousel-arrow next" data-carousel="suggested-carousel">❯</button>
+                    </div>
+                </div>
+                <div class="carousel-container">
+                    <div class="movie-carousel" id="suggested-carousel"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="zalo-chat-button">
+        <a href="https://zalo.me/YOUR_ZALO_OA_ID" target="_blank" title="Chat với chúng tôi qua Zalo">
+        <img src="uploads/service/zalo.jpg" alt="Zalo Chat">
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2025 TVN Films.</p>
+            <div class="social-links mt-2">
+                <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/movie-detail.js"></script>
+</body>
+</html>

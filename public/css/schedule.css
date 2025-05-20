@@ -1,0 +1,486 @@
+/* Container chính */
+.schedule-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 1200px;
+    background: #1a1a1a;
+}
+
+/* Hàng chứa ảnh phim và form */
+.schedule-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Ảnh phim */
+.movie-image {
+    flex: 0 0 300px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.movie-image img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #f8c146;
+}
+
+/* Form đặt lịch */
+.schedule-form {
+    flex: 1;
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.schedule-form h2 {
+    color: #f8c146;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.schedule-form label {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Nhóm tùy chọn */
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left;
+}
+
+.date-btn,
+.showtime-btn,
+.option-btn {
+    background: #2a2a2a;
+    color: #f8c146;
+    border: 1px solid #f8c146;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.date-btn.selected,
+.showtime-btn.selected,
+.option-btn.selected {
+    background: #f8c146;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.showtime-btn.disabled {
+    background: #444;
+    color: #999;
+    border: 1px solid #555;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Sơ đồ ghế */
+.seat-map-container {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    width: 100%;
+}
+
+.screen-label {
+    text-align: center;
+    color: #f8c146;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.screen-label::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 3px;
+    background: #f8c146;
+    margin: 5px auto;
+    border-radius: 2px;
+}
+
+.seat-map {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.seat-row {
+    display: flex;
+    gap: 10px;
+}
+
+.seat {
+    width: 35px;
+    height: 35px;
+    background: #2a2a2a;
+    border: 1px solid #f8c146;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.seat.selected {
+    background: #f8c146;
+    color: #1a1a1a;
+}
+
+.seat.booked {
+    background: #dc3545;
+    color: #fff;
+    border: 1px solid #b02a37;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.seat.empty {
+    background: none;
+    border: none;
+    cursor: default;
+}
+
+.seat-legend {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.seat-legend div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.seat-legend .seat {
+    width: 20px;
+    height: 20px;
+}
+
+/* Dịch vụ đi kèm */
+.service-section {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+.service-option {
+    width: 160px;
+    height: 300px;
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #f8c146;
+}
+
+.service-content {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #f8c146;
+    background-color: #333;
+}
+
+.service-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.service-info {
+    width: 100%;
+    height: 90px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.service-details {
+    width: 100%;
+    padding: 0 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-option h5 {
+    font-size: 0.9rem;
+    color: #fff;
+    margin: 0;
+    font-weight: 500;
+    max-width: 60%;
+    text-align: left;
+}
+
+.service-price {
+    font-size: 0.9rem;
+    color: #f8c146;
+    font-weight: 600;
+    text-align: right;
+}
+
+.service-quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
+}
+
+.service-quantity-btn {
+    background: #f8c146;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.service-quantity {
+    font-size: 0.9rem;
+    color: #fff;
+    min-width: 20px;
+    text-align: center;
+}
+
+.price-change {
+    color: #f8c146;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* Tổng giá */
+.total-price {
+    text-align: right;
+    margin: 20px 0;
+    font-size: 1.8rem;
+    color: #f8c146;
+    font-weight: 600;
+}
+
+.base-price {
+    font-size: 1rem;
+    color: #ccc;
+    font-weight: 400;
+}
+
+/* Nút đặt lịch */
+.btn-primary {
+    background: #f8c146;
+    border: none;
+    color: #1a1a1a;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* Chi tiết hóa đơn */
+.invoice-details {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #f8c146;
+}
+
+.invoice-details h3 {
+    color: #f8c146;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.invoice-details p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.invoice-details p strong {
+    color: #f8c146;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .schedule-container {
+        max-width: 900px;
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .movie-image {
+        flex: 0 0 280px;
+    }
+
+    .movie-image img {
+        height: 400px;
+    }
+
+    .schedule-form {
+        padding: 15px;
+    }
+
+    .schedule-form h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .schedule-container {
+        max-width: 700px;
+    }
+
+    .movie-image {
+        flex: 0 0 260px;
+    }
+
+    .movie-image img {
+        height: 380px;
+    }
+
+    .schedule-form {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .schedule-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-image {
+        flex: 0 0 100%;
+        max-width: 300px;
+    }
+
+    .movie-image img {
+        height: 350px;
+    }
+
+    .schedule-form {
+        padding: 15px;
+    }
+
+    .schedule-form h2 {
+        font-size: 1.5rem;
+    }
+
+    .seat {
+        width: 30px;
+        height: 30px;
+        font-size: 0.7rem;
+    }
+
+    .service-option {
+        width: 150px;
+        height: 280px;
+    }
+
+    .service-content {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .schedule-container {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .movie-image {
+        max-width: 250px;
+    }
+
+    .movie-image img {
+        height: 300px;
+    }
+
+    .schedule-form {
+        padding: 10px;
+    }
+
+    .schedule-form h2 {
+        font-size: 1.4rem;
+    }
+
+    .date-btn,
+    .showtime-btn,
+    .option-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .seat {
+        width: 28px;
+        height: 28px;
+        font-size: 0.65rem;
+    }
+
+    .service-option {
+        width: 140px;
+        height: 260px;
+    }
+
+    .service-content {
+        height: 160px;
+    }
+}

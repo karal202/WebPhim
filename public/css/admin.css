@@ -1,0 +1,37 @@
+/* Card cho các mục quản lý */
+.card {
+    background-color: #2a2a2a;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(248, 193, 70, 0.3);
+}
+
+.card i {
+    color: #f8c146;
+}
+
+.card-title {
+    color: #f8c146;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.btn-outline-light {
+    border-color: #f8c146;
+    color: #f8c146;
+}
+
+.btn-outline-light:hover {
+    background-color: #f8c146;
+    color: #1a1a1a;
+}
