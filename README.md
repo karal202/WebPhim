@@ -134,7 +134,7 @@ Dự án dùng PDO để kết nối MySQL qua `app/config/config.php`.
 - Truy cập `http://localhost/db_test.php`. Nếu thấy thông báo thành công, MySQL hoạt động.
 
 ### 3. Kiểm tra HTML/CSS/JS
-- Tạo `index.html`:
+- Tạo `test.html`:
   ```html
   <!DOCTYPE html>
   <html>
@@ -158,12 +158,12 @@ Dự án dùng PDO để kết nối MySQL qua `app/config/config.php`.
    ├── app/
    │   └── config/
    │       └── config.php
-   ├── index.php
+   ├── test.php
    ├── style.css
    ├── script.js
    └── webphimm.sql
    ```
-3. Ví dụ `index.php`:
+3. Ví dụ `test.php`:
    ```php
    <?php
    require_once 'app/config/config.php';
